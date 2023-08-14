@@ -1,40 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import { traerDatos } from './libreria/connecciones'
+import Tareas from './components/Tareas'
+import AddModal from './layout/AddModal'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [datos, setDatos] = useState([])
   const [hidden, setHidden] = useState(true)
+
+  useEffect(() => {
+    traerDatos({setDatos})
+  }, [])
 
   return (
     <>
       <div>
-        <button onClick={()=>{hidden?setHidden(false):setHidden(true)}}>Agregar tarea</button>
+        <button onClick={() => { hidden ? setHidden(false) : setHidden(true) }}>Agregar tarea</button>
         <div hidden={hidden}>
-          
+          <AddModal/>
         </div>
       </div>
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
+      <div>
+        tareas <br />
+        <div>
+          {datos.map(dato => (
+            <Tareas key={dato.id} id={dato.id} nombre={dato.nombre} descripcion={dato.descripcion} estado={dato.estado}/>
+          ))}
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
     </>
   )
 }
