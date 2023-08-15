@@ -1,14 +1,14 @@
-export const urlBase = 'http://localhost:3000'
+const urlBase = 'http://localhost:3000'
 
 export const traerDatos = async ({ setDatos }) => {
-    const tareasFetch = await fetch(urlBase + '/getTarea', {
+    const tareasFetch = await fetch(urlBase + '/Tarea', {
         method: 'GET'
     })
     const tareas = await tareasFetch.json();
     setDatos(await tareas)
 }
-export const agregarDatos = async ( nombre, descripcion ) => {
-    const tareasFetch = await fetch(urlBase + '/postTarea', {
+export const agregarDatos = async ( nombre, descripcion,{setDatos} ) => {
+    const tareasFetch = await fetch(urlBase + '/Tarea', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -20,13 +20,25 @@ export const agregarDatos = async ( nombre, descripcion ) => {
     })
     const tareas = await tareasFetch.json();
     console.log(tareas)
-    return tareas
+    traerDatos({setDatos})
 }
-export const eliminarDatos = async () => {
+export const eliminarDatos = async (id,{setDatos}) => {
 
-    const tareasFetch = await fetch(urlBase + '/deleteTarea', {
+    const tareasFetch = await fetch(urlBase + '/Tarea/' + id, {
+        method: 'DELETE'
+    })
+
+    const tareas = await tareasFetch.json();
+    traerDatos({setDatos})
+
+}
+export const completarDatos = async (id,{setDatos}) => {
+
+    const tareasFetch = await fetch(urlBase + '/Tarea/' + id, {
         method: 'PUT'
     })
 
-    
+    const tareas = await tareasFetch.json();
+    traerDatos({setDatos})
+
 }

@@ -1,14 +1,14 @@
 import React from 'react'
 import { agregarDatos } from '../libreria/connecciones';
 
-const AddModal = () => {
+const AddModal = ({setDatos}) => {
 
     const handleSubmit = e => {
         e.preventDefault()
         const formData = new FormData(e.target);
         const description = formData.get("descripcion");
         const title = formData.get("nombre");
-        agregarDatos(title, description)
+        agregarDatos(title, description,{setDatos: setDatos})
     }
 
     return (
