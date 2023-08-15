@@ -6,7 +6,8 @@ const app=express();
 
 const db = require('./src/db/db')
 
-db({uri:'mongodb://localhost:27017/tarea'})
+// db({uri:'mongodb://localhost:27017/tarea'})
+db({uri:'mongodb+srv://alsofabio:1234@queso.u03ucr0.mongodb.net/tarea'})
 
 app.use(cors())
 app.use(morgan('combined'))

@@ -1,4 +1,5 @@
 export const urlBase = 'http://localhost:3000'
+
 export const traerDatos = async ({ setDatos }) => {
     const tareasFetch = await fetch(urlBase + '/getTarea', {
         method: 'GET'
@@ -26,4 +27,6 @@ export const eliminarDatos = async () => {
     const tareasFetch = await fetch(urlBase + '/deleteTarea', {
         method: 'PUT'
     })
+
+    
 }
